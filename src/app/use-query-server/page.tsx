@@ -1,6 +1,7 @@
 import { Container, Stack } from "styled-system/jsx";
 import SearchParamClientPage from "../use-query/page";
 import { Heading } from "~/components/ui/typography";
+import { Suspense } from "react";
 
 export default function TestePage({
   searchParams,
@@ -12,7 +13,9 @@ export default function TestePage({
       <Stack>
         <Heading>Server: {searchParams.framework}</Heading>
 
-        <SearchParamClientPage />
+        <Suspense>
+          <SearchParamClientPage />
+        </Suspense>
       </Stack>
     </Container>
   );
