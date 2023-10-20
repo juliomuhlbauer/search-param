@@ -10,9 +10,7 @@ export default function TestePage({
   return (
     <Container>
       <Stack>
-        <h1>Teste</h1>
-
-        <Heading>{searchParams.framework}</Heading>
+        <Heading>Server: {searchParams.framework}</Heading>
 
         <SearchParamClientPage />
       </Stack>

@@ -55,13 +55,12 @@ export default function SearchParamClientPage() {
   return (
     <Container>
       <Stack>
-        <h1>Search Param</h1>
-
-        <Heading>{framework}</Heading>
+        <Heading>Client: {framework}</Heading>
 
         {items.map((item) => (
           <Button
             key={item.value}
+            variant="outline"
             //   href={`/search-param?framework=${item.value}`}
             onClick={() => setFramework(item.value)}
           >
