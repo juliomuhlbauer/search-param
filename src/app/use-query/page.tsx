@@ -53,56 +53,54 @@ export default function SearchParamClientPage() {
   ];
 
   return (
-    <Container>
-      <Stack>
-        <Heading>Client: {framework}</Heading>
+    <Stack>
+      <Heading>Client: {framework}</Heading>
 
-        {items.map((item) => (
-          <Button
-            key={item.value}
-            variant="outline"
-            //   href={`/search-param?framework=${item.value}`}
-            onClick={() => setFramework(item.value)}
-          >
-            {item.label}
-          </Button>
-        ))}
-
-        <Select
-          positioning={{ sameWidth: true }}
-          width="2xs"
-          items={items}
-          value={[framework]}
-          onChange={({ value }) => setFramework(value[0])}
+      {items.map((item) => (
+        <Button
+          key={item.value}
+          variant="outline"
+          //   href={`/search-param?framework=${item.value}`}
+          onClick={() => setFramework(item.value)}
         >
-          <SelectLabel>Framework</SelectLabel>
-          <SelectControl>
-            <SelectTrigger>
-              <SelectValue placeholder="Select a Framework" />
-              <ChevronsUpDownIcon />
-            </SelectTrigger>
-          </SelectControl>
-          <Portal>
-            <SelectPositioner>
-              <SelectContent>
-                <SelectItemGroup id="framework">
-                  <SelectItemGroupLabel htmlFor="framework">
-                    Framework
-                  </SelectItemGroupLabel>
-                  {items.map((item) => (
-                    <SelectItem key={item.value} item={item}>
-                      <SelectItemText>{item.label}</SelectItemText>
-                      <SelectItemIndicator>
-                        <CheckIcon />
-                      </SelectItemIndicator>
-                    </SelectItem>
-                  ))}
-                </SelectItemGroup>
-              </SelectContent>
-            </SelectPositioner>
-          </Portal>
-        </Select>
-      </Stack>
-    </Container>
+          {item.label}
+        </Button>
+      ))}
+
+      <Select
+        positioning={{ sameWidth: true }}
+        width="2xs"
+        items={items}
+        value={[framework]}
+        onChange={({ value }) => setFramework(value[0])}
+      >
+        <SelectLabel>Framework</SelectLabel>
+        <SelectControl>
+          <SelectTrigger>
+            <SelectValue placeholder="Select a Framework" />
+            <ChevronsUpDownIcon />
+          </SelectTrigger>
+        </SelectControl>
+        <Portal>
+          <SelectPositioner>
+            <SelectContent>
+              <SelectItemGroup id="framework">
+                <SelectItemGroupLabel htmlFor="framework">
+                  Framework
+                </SelectItemGroupLabel>
+                {items.map((item) => (
+                  <SelectItem key={item.value} item={item}>
+                    <SelectItemText>{item.label}</SelectItemText>
+                    <SelectItemIndicator>
+                      <CheckIcon />
+                    </SelectItemIndicator>
+                  </SelectItem>
+                ))}
+              </SelectItemGroup>
+            </SelectContent>
+          </SelectPositioner>
+        </Portal>
+      </Select>
+    </Stack>
   );
 }
