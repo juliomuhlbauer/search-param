@@ -24,7 +24,8 @@ import Link from "next/link";
 import { Heading } from "~/components/ui/typography";
 import { hstack } from "styled-system/patterns/hstack";
 
-// import { useQueryState } from "next-usequerystate";
+import { parseAsString, useQueryState } from "next-usequerystate";
+import { Button } from "~/components/ui/button";
 
 type Item = {
   label: string;
@@ -33,9 +34,14 @@ type Item = {
 };
 
 export default function SearchParamClientPage() {
-  const searchParam = useSearchParams();
-
-  const framework = searchParam.get("framework") || "none";
+  const [framework, setFramework] = useQueryState(
+    "framework",
+    parseAsString
+      .withOptions({
+        shallow: false,
+      })
+      .withDefault("react")
+  );
 
   console.log(framework);
 
@@ -54,12 +60,22 @@ export default function SearchParamClientPage() {
         <Heading>{framework}</Heading>
 
         {items.map((item) => (
-          <Link key={item.value} href={`/search-param?framework=${item.value}`}>
+          <Button
+            key={item.value}
+            //   href={`/search-param?framework=${item.value}`}
+            onClick={() => setFramework(item.value)}
+          >
             {item.label}
-          </Link>
+          </Button>
         ))}
 
-        <Select positioning={{ sameWidth: true }} width="2xs" items={items}>
+        <Select
+          positioning={{ sameWidth: true }}
+          width="2xs"
+          items={items}
+          value={[framework]}
+          onChange={({ value }) => setFramework(value[0])}
+        >
           <SelectLabel>Framework</SelectLabel>
           <SelectControl>
             <SelectTrigger>
@@ -75,11 +91,7 @@ export default function SearchParamClientPage() {
                     Framework
                   </SelectItemGroupLabel>
                   {items.map((item) => (
-                    <SelectItem
-                      key={item.value}
-                      item={item}
-                      // className={hstack()}
-                    >
+                    <SelectItem key={item.value} item={item}>
                       <SelectItemText>{item.label}</SelectItemText>
                       <SelectItemIndicator>
                         <CheckIcon />
