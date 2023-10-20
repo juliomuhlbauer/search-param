@@ -51,8 +51,12 @@ function useSearchParamsListener() {
       handler();
     };
 
+    // back and forward history
+    window.addEventListener("popstate", handler);
+
     return () => {
-      history.pushState = originalPushState; // restore the copy
+      history.pushState = originalPushState;
+      window.removeEventListener("popstate", handler);
     };
   }, []);
 
