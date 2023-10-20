@@ -47,7 +47,6 @@ function useSearchParamsListener() {
     history.pushState = function (data, title, url) {
       originalPushState.apply(history, [data, title, url]);
 
-      console.log("changed", history.state);
       handler();
     };
 
@@ -78,13 +77,7 @@ export default function SelectRegiao() {
     [searchParams]
   );
 
-  const cidade = searchParams.get(TEST_PARAM);
-
-  if (!cidade) {
-    return null;
-  }
-
-  // console.log(cidade);
+  const cidade = searchParams.get(TEST_PARAM) || "";
 
   const items = CITIES.map((item) => ({
     label: item.city,
